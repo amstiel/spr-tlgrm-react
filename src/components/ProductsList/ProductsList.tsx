@@ -16,6 +16,7 @@ export const ProductsList: FC<ProductsListProps> = (props) => {
             {products.map((product) => (
                 <li key={product.id}>
                     <ProductCard
+                        id={product.id}
                         title={product.title}
                         image={product.image}
                         price={product.price}
