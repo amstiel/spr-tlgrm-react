@@ -30,7 +30,12 @@
 
 .button {
     background-color: #4e9f37;
-    padding: 7px 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 4px;
     color: white;
     border: none;
@@ -42,6 +47,11 @@
 
 .button.isCompact {
     width: 30px;
+    padding: 0;
+}
+
+.button.isRemove {
+    background-color: #ff6347;
 }
 
 .button:focus, .button:hover {

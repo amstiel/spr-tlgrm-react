@@ -52,12 +52,12 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
 
                 <div className={styles.buttonsWrapper}>
                     {isProductInCart ? <>
-                        <button className={clsx(styles.button, styles.isCompact)} onClick={onDeleteButtonClick}>
-                            -
+                        <button className={clsx(styles.button, styles.isCompact, styles.isRemove)} onClick={onDeleteButtonClick}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.333 7.333h9.334a.667.667 0 110 1.334H3.333a.667.667 0 010-1.334z"></path></svg>
                         </button>
                         <span className={styles.quantity}>{cartItemForCurrentProduct.quantity}</span>
                         <button className={clsx(styles.button, styles.isCompact)} onClick={handleAddButtonClick}>
-                            +
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.667c.368 0 .667.298.667.666v4h4a.667.667 0 110 1.334h-4v4a.667.667 0 11-1.334 0v-4h-4a.667.667 0 010-1.334h4v-4c0-.368.299-.666.667-.666z"></path></svg>
                         </button>
                     </> : <>
                         <button className={styles.button} onClick={handleAddButtonClick}>

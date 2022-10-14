@@ -23,6 +23,7 @@ function App() {
         if (cartTotalQuantity > 0) {
             Telegram.WebApp.MainButton.setParams({
                 text: `Заказать вкусностей на ${cartTotalAmount} руб.`,
+                color: '#4e9f37'
             });
             Telegram.WebApp.MainButton.show();
         } else {
