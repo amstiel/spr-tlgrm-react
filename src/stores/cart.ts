@@ -13,6 +13,7 @@ type CartState = {
 };
 
 export const addProduct = cartDomain.createEvent<CartItem>();
+export const removeProduct = cartDomain.createEvent<CartItem>();
 
 const cartInitialState: CartState = {
     items: [],
@@ -28,6 +29,14 @@ export const $cart = cartDomain.createStore(cartInitialState).on(addProduct, (st
         newCartItems.push(product);
     }
     return { ...state, items: newCartItems };
+}).on(removeProduct, (state, product) => {
+    const newCartItems = [...state.items];
+    const cartItem = newCartItems.find((item) => item.productId === product.productId);
+
+    if (cartItem !== undefined) {
+        cartItem.quantity -= product.quantity;
+    }
+    return { ...state, items: newCartItems.filter(product => product.quantity > 0) };
 });
 
 export const $cartTotalQuantity = $cart.map((state) =>

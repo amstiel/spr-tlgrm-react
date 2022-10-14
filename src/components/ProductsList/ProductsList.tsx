@@ -14,7 +14,7 @@ export const ProductsList: FC<ProductsListProps> = (props) => {
     return (
         <ul className={styles.list}>
             {products.map((product) => (
-                <li key={product.id}>
+                <li key={product.id} style={{ height: '100%' }}>
                     <ProductCard
                         id={product.id}
                         title={product.title}
