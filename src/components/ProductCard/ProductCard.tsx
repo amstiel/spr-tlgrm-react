@@ -26,6 +26,7 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
 
     const handleAddButtonClick = () => {
         addProduct({
+            title: title,
             productId: id,
             quantity: 1,
             pricePerItem: price,
@@ -34,6 +35,7 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
 
     const onDeleteButtonClick = () => {
         removeProduct({
+            title: title,
             productId: id,
             quantity: 1,
             pricePerItem: price

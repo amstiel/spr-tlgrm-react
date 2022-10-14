@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useCallback, useEffect} from 'react';
 import { products } from './mock/products';
 import { ProductsList } from './components/ProductsList/ProductsList';
 
@@ -6,14 +6,26 @@ import styles from './App.module.css';
 import { $cart, $cartTotalAmount, $cartTotalQuantity } from './stores/cart';
 import { useStore } from 'effector-react';
 
+const queryId = Telegram.WebApp.initDataUnsafe?.query_id;
+
 function App() {
     const { items } = useStore($cart);
     const cartTotalQuantity = useStore($cartTotalQuantity);
     const cartTotalAmount = useStore($cartTotalAmount);
-
-    const handleOnClick = () => {
-        Telegram.WebApp.BackButton.show();
-    };
+    const onSendData = useCallback(() => {
+        const data = {
+            products: items,
+            totalPrice: cartTotalAmount,
+            queryId,
+        }
+        fetch('https://spr-tlgrm-bot.herokuapp.com/order-details', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+    }, [items])
 
     useEffect(() => {
         Telegram.WebApp.ready();
@@ -30,6 +42,13 @@ function App() {
             Telegram.WebApp.MainButton.hide();
         }
     }, [cartTotalAmount, cartTotalQuantity]);
+
+    useEffect(() => {
+        Telegram.WebApp.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            Telegram.WebApp.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
 
     return (
         <div className={styles.container}>

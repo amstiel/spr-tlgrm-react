@@ -3,6 +3,7 @@ import { createDomain } from 'effector';
 const cartDomain = createDomain();
 
 type CartItem = {
+    title: string;
     productId: number;
     quantity: number;
     pricePerItem: number;
