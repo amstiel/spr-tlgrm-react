@@ -8,6 +8,10 @@ import { products } from './mock/products';
 import styles from './App.module.css';
 
 const queryId = Telegram.WebApp.initDataUnsafe?.query_id;
+const apiProviderUrl = import.meta.env.VITE_API_PROVIDER_URL ?? '';
+if (apiProviderUrl === '') {
+    throw new Error('Fill VITE_API_PROVIDER_URL in .env');
+}
 
 function App() {
     const { items } = useStore($cart);
@@ -19,8 +23,8 @@ function App() {
             totalPrice: cartTotalAmount,
             queryId,
         };
-        Telegram.WebApp.MainButton.showProgress;
-        fetch('https://worker-production-4214.up.railway.app:8094/order-details', {
+        Telegram.WebApp.MainButton.showProgress(false);
+        fetch(`${apiProviderUrl}/order-details`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
