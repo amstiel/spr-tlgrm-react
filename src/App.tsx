@@ -65,6 +65,7 @@ function App() {
     return (
         <div className={styles.container}>
             <ProductsList products={products} />
+            <button onClick={onSendData}>debug send</button>
         </div>
     );
 }
